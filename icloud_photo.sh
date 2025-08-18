@@ -91,23 +91,34 @@ done < <(
     | jq -r '.items | to_entries[] | "https://" + .value.url_location + .value.url_path + "&" + .key'
 )
 
-echo -e "\nChecking for unexpected files in download directory"
+if [[ -n "$2" ]]; then
+    echo -e "\nChecking for unexpected files in download directory"
 
-set +e
-containsElement () {
-  local e match="$1"
-  shift
-  for e; do [[ "$e" == "$match" ]] && return 0; done
-  return 1
-}
+    set +e
+    containsElement () {
+    local e match="$1"
+    shift
+    for e; do [[ "$e" == "$match" ]] && return 0; done
+    return 1
+    }
 
-# If the image file is not in the known list of filenames, delete it
-for IMAGE_FILE in *; do
-    if ! containsElement "$IMAGE_FILE" "${FILENAMES[@]}"; then
-        echo "Deleting unexpected file: $IMAGE_FILE"
-        rm $IMAGE_FILE
-    fi
-done
+    SAFE_EXTENSIONS="jpg jpeg png gif mp4 mov heic"
+
+    # If the image file is not in the known list of filenames, delete it
+    for IMAGE_FILE in *; do
+        if [[ -f "$IMAGE_FILE" ]]; then
+            EXT="${IMAGE_FILE##*.}"
+            if echo "$SAFE_EXTENSIONS" | grep -iq "\b$EXT\b"; then
+                if ! containsElement "$IMAGE_FILE" "${FILENAMES[@]}"; then
+                    echo "DELETING unexpected file: $IMAGE_FILE"
+                    rm -- "$IMAGE_FILE"
+                fi
+            else
+                echo "Not Deleting unexpected file with unknown extension: $IMAGE_FILE"
+            fi
+        fi
+    done
+fi
 
 echo -e "iCloud Photo Downloader Finished\n"
 
