@@ -34,23 +34,22 @@ print("Press Ctrl+C to stop.")
 inky = auto(ask_user=True, verbose=True)
 saturation = 0.5
 
-while True:
-    print("Loading images")
-    images = os.listdir(args.infolder)
-    random.shuffle(images)
-    print(f"Found {len(images)} images")
-    print("Displaying images")
+print("Loading images")
+images = os.listdir(args.infolder)
+random.shuffle(images)
+print(f"Found {len(images)} images")
+print("Displaying images")
 
-    for file in images:
-        filename = os.fsdecode(file)
-        filepath = os.path.abspath(f"{args.infolder}/{filename}")
+for file in images:
+    filename = os.fsdecode(file)
+    filepath = os.path.abspath(f"{args.infolder}/{filename}")
 
-        image = Image.open(filepath)
+    image = Image.open(filepath)
 
-        try:
-            inky.set_image(image, saturation=saturation)
-        except TypeError:
-            inky.set_image(image)
-        inky.show()
+    try:
+        inky.set_image(image, saturation=saturation)
+    except TypeError:
+        inky.set_image(image)
+    inky.show()
 
-        time.sleep(sleep_time)
+    time.sleep(sleep_time)

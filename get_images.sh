@@ -18,7 +18,7 @@ fi
 
 if [[ -z "$IMAGES_FOLDER" ]]; then
     IMAGES_FOLDER="./images"
-    echo "IMAGES_FOLDER not set in get_images.conf, defaulting to $IMAGES_FOLDER"
+    echo "IMAGES_FOLDER not set in photo_frame.conf, defaulting to $IMAGES_FOLDER"
 else
     echo "using IMAGES_FOLDER of $IMAGES_FOLDER"
 fi
