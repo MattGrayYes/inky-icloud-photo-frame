@@ -49,6 +49,9 @@ do
     echo -e "\n\033[7mGetting Images\033[0m"
     ./get_images.sh | sed 's/^/| /'
 
+    echo -e "\n\033[7mImages Satus\033[0m"
+    ls -R $IMAGES_FOLDER | sed 's/^/| /'
+
     echo -e "\n\033[7mRunning Image Looper\033[0m"
     ./image_looper.py --infolder $IMAGES_FOLDER/processed/ --time $DISPLAY_TIME | sed 's/^/| /'
 done
