@@ -37,11 +37,11 @@ def scale(image: Image, target_width=800, target_height=480) -> Image:
     """
     width, height = image.size
     if height/width < target_height/target_width:
-        warn('too wide: cropping')
+        print('too wide: cropping')
         new_height = target_height
         new_width = int(width * new_height / height)
     else:
-        warn('too tall: cropping')
+        print('too tall: cropping')
         new_width = target_width
         new_height = int(height * new_width / width)
     print(height, width, target_height, target_width, new_height, new_width)
