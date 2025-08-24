@@ -6,9 +6,7 @@ import sys
 import os
 from pprint import pprint
 from warnings import warn
-
 from PIL import Image
-
 from inky.auto import auto
 
 parser = argparse.ArgumentParser()
@@ -60,7 +58,20 @@ def scale(image: Image, target_width=800, target_height=480) -> Image:
                    ))
     return img
 
-    
+# check if outfolder has extra images in it that arent in infolder
+infolder_files = set(os.listdir(args.infolder))
+outfolder_files = set(os.listdir(args.outfolder))
+extra_files = outfolder_files - infolder_files
+if extra_files:
+    print("The processed folder has files which are no longer part of the iCloud album.")
+    print("Deleting surplus png files:")
+    for file in extra_files:
+        if file.endswith('.png'):
+            print(f"Deleting {args.outfolder}/{file}")
+            os.remove(f"{args.outfolder}/{file}")
+        else:
+            print(f"Skipping non-png file {file}")
+
 for file in os.listdir(args.infolder):
     filename = os.fsdecode(file)
     filepath = os.path.abspath(f"{args.infolder}/{filename}")
