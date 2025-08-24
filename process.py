@@ -27,8 +27,8 @@ if not (args.infolder and args.outfolder):
     {sys.argv[0]} --infolder ./images/icloud/ --outfolder ./images/processed/ (--saturation 0.5)""")
     sys.exit(1)
 
-print(f"Input: {args.infolder}/Example.png")
-print(f"Output: {args.outfolder}/Example.png")
+print(f"Input: {args.infolder}/")
+print(f"Output: {args.outfolder}/")
 
 def scale(image: Image, target_width=800, target_height=480) -> Image:
     """
@@ -75,7 +75,7 @@ if extra_files:
             os.remove(f"{args.outfolder}/{file}")
         else:
             print(f"Skipping non-png file {file}")
-            
+
 if new_files:
     for file in new_files:
         filename = os.fsdecode(file)
