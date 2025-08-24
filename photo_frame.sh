@@ -46,7 +46,6 @@ fi
 
 while :
 do
-    echo "\n\033[1mChecking iCloud Album and processing images\033[0m"
     echo -e "\n\033[7mGetting Images\033[0m"
     ./get_images.sh | sed 's/^/| /'
 
