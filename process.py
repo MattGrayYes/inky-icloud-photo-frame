@@ -64,6 +64,7 @@ outfolder_files = set(os.listdir(args.outfolder))
 # remove .png suffix from outfolder files for comparison
 outfolder_files = set([f[:-4] if f.endswith('.png') else f for f in outfolder_files])  
 extra_files = outfolder_files - infolder_files
+new_files = infolder_files - outfolder_files
 
 if extra_files:
     print("The processed folder has files which are no longer part of the iCloud album.")
@@ -74,20 +75,22 @@ if extra_files:
             os.remove(f"{args.outfolder}/{file}")
         else:
             print(f"Skipping non-png file {file}")
+            
+if new_files:
+    for file in new_files:
+        filename = os.fsdecode(file)
+        filepath = os.path.abspath(f"{args.infolder}/{filename}")
 
-for file in os.listdir(args.infolder):
-    filename = os.fsdecode(file)
-    filepath = os.path.abspath(f"{args.infolder}/{filename}")
+        print(f"Processing {filepath}")
+        image = Image.open(filepath)
+        resizedimage = scale(image, inky.WIDTH, inky.HEIGHT)
+        resizedimage.save(f"{args.outfolder}/{filename}.png")
 
-    print(f"Processing {filepath}")
-    image = Image.open(filepath)
-    resizedimage = scale(image, inky.WIDTH, inky.HEIGHT)
-    resizedimage.save(f"{args.outfolder}/{filename}.png")
-
-    if args.show:
-        try:
-            inky.set_image(resizedimage, saturation=saturation)
-        except TypeError:
-            inky.set_image(resizedimage)
-        inky.show()
-    
+        if args.show:
+            try:
+                inky.set_image(resizedimage, saturation=saturation)
+            except TypeError:
+                inky.set_image(resizedimage)
+            inky.show()
+else:
+    print("No new images to process")
