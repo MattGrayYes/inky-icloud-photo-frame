@@ -25,6 +25,8 @@ fi
 
 source ~/.virtualenvs/pimoroni/bin/activate
 
-./icloud_photo.sh $ICLOUD_URL $IMAGES_FOLDER/icloud/
-./process.py --infolder $IMAGES_FOLDER/icloud/ --outfolder $IMAGES_FOLDER/processed/
-ls -l $IMAGES_FOLDER/processed/
+echo -e "\n\033[7miCloud Photo Downloader\033[0m"
+./icloud_photo.sh $ICLOUD_URL $IMAGES_FOLDER/icloud/ | sed 's/^/| /' 
+
+echo -e "\n\033[7mProcessing Images\033[0m"
+./process.py --infolder $IMAGES_FOLDER/icloud/ --outfolder $IMAGES_FOLDER/processed/ | sed 's/^/| /' 

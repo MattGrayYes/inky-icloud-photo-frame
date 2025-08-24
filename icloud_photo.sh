@@ -4,9 +4,6 @@
 # requires jq
 # arg 1: iCloud web album URL
 # arg 2: folder to download into (optional)
-
-echo -e "\n* iCloud Photo Downloader *\n"
-
 function curl_post_json {
 	curl -sH "Content-Type: application/json" -X POST -d "@-" "$@"
 }
@@ -120,7 +117,7 @@ if [[ -n "$2" ]]; then
     done
 fi
 
-echo -e "iCloud Photo Downloader Finished\n"
+echo -e "iCloud Photo Downloader Finished"
 
 
 popd > /dev/null
