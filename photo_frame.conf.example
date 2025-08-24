@@ -1,1 +1,3 @@
 ICLOUD_URL="https://www.icloud.com/sharedalbum/#[REDACTED - REPLACE WITH YOUR URL]"
+DISPLAY_TIME=1800
+IMAGES_FOLDER="./images"
