@@ -29,6 +29,33 @@ Who knows what's required to make this work but here's some idea of what I've do
 * clone this repo to a folder
 * run `./photo_frame.sh`
 
+### Auto-run with Systemd
+1. run the above and watch the output to make sure it works fine.
+2. Create service file`sudo vim /etc/systemd/system/photo_frame.service`
+3. Add the following to configure it
+    ```
+    [Unit]
+    Description=Photo Frame
+    After=network-online.target
+    
+    [Service]
+    User=YOUR_USERNAME
+    Type=exec
+    WorkingDirectory=THE_FOLDER_WHERE_THIS_CODE_IS
+    ExecStart=/bin/bash THE_FOLDER_WHERE_THIS_CODE_IS/photo_frame.sh
+    Restart=on-failure
+    RestartSec=60
+
+    [Install]
+    WantedBy=multi-user.target
+    ```
+4. Start the service: `sudo systemctl start photo_frame.service`
+5. Monitor the service live as it runs `journalctl --follow --unit=photo_frame.service --lines=20`
+6. Take a sneak peek at the service `systemctl status photo_frame.service`
+7. If it all looks fine, enable the service `sudo systemctl enable photo_frame.service`
+8. Reboot `sudo reboot`
+9. log back in and see if it's running `systemctl status photo_frame.service`
+
 
 ## Sources
 * `icloud_photo.sh` based on a comment on [@Fay59's gist](https://gist.github.com/fay59/8f719cd81967e0eb2234897491e051ec?permalink_comment_id=4219612#gistcomment-4219612)
