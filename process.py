@@ -61,7 +61,10 @@ def scale(image: Image, target_width=800, target_height=480) -> Image:
 # check if outfolder has extra images in it that arent in infolder
 infolder_files = set(os.listdir(args.infolder))
 outfolder_files = set(os.listdir(args.outfolder))
+# remove .png suffix from outfolder files for comparison
+outfolder_files = set([f[:-4] if f.endswith('.png') else f for f in outfolder_files])  
 extra_files = outfolder_files - infolder_files
+
 if extra_files:
     print("The processed folder has files which are no longer part of the iCloud album.")
     print("Deleting surplus png files:")
