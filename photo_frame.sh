@@ -10,9 +10,16 @@ source photo_frame.conf
 
 if [[ -z "$DISPLAY_TIME" ]]; then
     DISPLAY_TIME=1800
-    echo "DISPLAY_TIME not set in get_images.conf, defaulting to $DISPLAY_TIME seconds"
+    echo "DISPLAY_TIME not set in photo_frame.conf, defaulting to $DISPLAY_TIME seconds"
 else
     echo "using DISPLAY_TIME of $DISPLAY_TIME seconds"
+fi
+
+if [[ -z "$IMAGES_FOLDER" ]]; then
+    IMAGES_FOLDER="./images"
+    echo "IMAGES_FOLDER not set in photo_frame.conf, defaulting to $IMAGES_FOLDER"
+else
+    echo "using IMAGES_FOLDER of $IMAGES_FOLDER"
 fi
 
 source ~/.virtualenvs/pimoroni/bin/activate
