@@ -1,6 +1,12 @@
 # iCloud Shared Album photo frame for Pimoroni Inky Impression
 Currently cobbling this together. I couldn't find anyone else's project that could do what I want so I'm making my own from bits I've found elsewhere to reduce workload.
 
+## What you need
+* Raspberry Pi, I used a [Raspberry Pi Zero 2W](https://shop.pimoroni.com/products/raspberry-pi-zero-2-w?variant=42101934587987)
+* [Pimoroni Inky Impression Spectra 7.3" ePaper Display](https://shop.pimoroni.com/products/inky-impression-7-3?variant=55186435244411)
+* [Ikea Rodalm Frame 130x180mm](https://www.ikea.com/gb/en/p/roedalm-frame-black-10548867/)
+* [3D-Printed mount and bracket](https://makerworld.com/en/models/2050481-inky-impression-mount-for-ikea-rodlam-w-back-plate#profileId-2212933)
+
 ## What it does
 ### Image library 
 1. Download images from icloud shared album
@@ -26,7 +32,7 @@ Who knows what's required to make this work but here's some idea of what I've do
 * in raspi-config, set to boot into console rather than gui
 * install inky library as per [getting started guide](https://learn.pimoroni.com/article/getting-started-with-inky-impression)
     * my bash script that runs the process starts by loading the pimoroni virtualenv which is set up by this installer.
-* clone this repo to a folder
+* clone this repo to a folder, or download and unzip the repo into a folder
 * run `./photo_frame.sh`
 
 ### Auto-run with Systemd
