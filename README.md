@@ -2,6 +2,9 @@
 Currently cobbling this together. I couldn't find anyone else's project that could do what I want so I'm making my own from bits I've found elsewhere to reduce workload.
 
 ## What you need
+* An iCloud Shared Photo Album with Public Website enabled
+  * You can create these in the Photos app on Apple devices: [iPhone / iPad](https://support.apple.com/en-gb/108314) / [Mac](https://support.apple.com/en-gb/124160), or on [iCloud for Windows](https://support.apple.com/en-gb/guide/icloud-windows/icwe010db4bc/icloud).
+  * Enabling Public Website is described in the "Inviting More People" section.
 * Raspberry Pi, I used a [Raspberry Pi Zero 2W](https://shop.pimoroni.com/products/raspberry-pi-zero-2-w?variant=42101934587987)
 * [Pimoroni Inky Impression Spectra 7.3" ePaper Display](https://shop.pimoroni.com/products/inky-impression-7-3?variant=55186435244411)
 * [Ikea Rodalm Frame 130x180mm](https://www.ikea.com/gb/en/p/roedalm-frame-black-10548867/)
@@ -33,6 +36,8 @@ Who knows what's required to make this work but here's some idea of what I've do
 * install inky library as per [getting started guide](https://learn.pimoroni.com/article/getting-started-with-inky-impression)
     * my bash script that runs the process starts by loading the pimoroni virtualenv which is set up by this installer.
 * clone this repo to a folder, or download and unzip the repo into a folder
+* Create a config file `cp photo_frame.config.example photo_frame.config`
+* Edit the config file
 * run `./photo_frame.sh`
 
 ### Auto-run with Systemd
