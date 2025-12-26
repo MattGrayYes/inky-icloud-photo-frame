@@ -68,7 +68,7 @@ Who knows what's required to make this work but here's some idea of what I've do
 9. log back in and see if it's running `systemctl status photo_frame.service`
 
 ### Add Extra WiFi network
-If it's going to need to connect to a different wifi network to the one you've used for setup, you can do this in advance while you're sshed in, though this will save the wifi password in plaintext along with the other connection info in /etc/NetworkManager/system-connections/
+If it's going to need to connect to a different wifi network to the one you've used for setup, you can add details of another wifi network in advance while you're sshed in, without it kicking you off the one you're currently on. This will save the wifi password in plaintext along with the other connection info in /etc/NetworkManager/system-connections/
 ```
 nmcli connection add \
     type wifi \
@@ -76,7 +76,10 @@ nmcli connection add \
     wifi-sec.key-mgmt wpa-psk \
     wifi-sec.psk "KEY"
 ```
-(The slashes here are just escaping the newlines. You can enter it all on one line, omitting the slashes.)
+(The slashes here are just escaping the newlines I've added for clarity. You can enter it all on one line, omitting the slashes.)
+
+`nmcli connection add  type wifi  wifi.ssid "SSID"  wifi-sec.key-mgmt wpa-psk  wifi-sec.psk "KEY"`
+
 
 ## Sources
 * `icloud_photo.sh` based on a comment on [@Fay59's gist](https://gist.github.com/fay59/8f719cd81967e0eb2234897491e051ec?permalink_comment_id=4219612#gistcomment-4219612)
